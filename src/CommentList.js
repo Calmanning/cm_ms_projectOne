@@ -1,34 +1,34 @@
 //wrote this component. Will need to check if it working proper.
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const CommentList = () => {
-  const [commenst, setComments] = useState({})
-  
-  const FetchComments = async() => {
-    const res = await axios.get(
-      `htp://localhost:8081/posts/${postsId}/comments`)  
-  
+const CommentList = ({ postId }) => {
+  const [comments, setComments] = useState([])
+
+  const fetchComments = async () => {
+    const res = await axios.get(`http://localhost:8081/posts/${postId}/comments`)
+                                 
     setComments(res.data)
   }
-    
-    useEffect(() => {
-      FetchComments();
-    }, [])
 
-  const renderedComments = Object.values(comments).maps(comment => {
+  useEffect(() => {
+    fetchComments();
+  }, [])
+
+  const renderedComments = comments.map(comment => {
     return (
-      <div className="card"
-      style= {{}}
-      key={comment.id}
-      >
-        <div>
-
-        </div>
-      </div>
+      <li key={comment.id}>
+        {comment.content}
+      </li>
     )
   })
 
-  }
+  return (
+    <ul>
+      {renderedComments}
+    </ul>
+  )
+
+}
 
 export default CommentList;
