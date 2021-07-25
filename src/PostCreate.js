@@ -21,7 +21,7 @@ const PostCreate = () => {
           <label> title </label>
           <input value={title} onChange={e => setTitle(e.target.value)} className="form-control" />
         </div>
-        <button className="btn btn-primary">Subby</button>
+        <button className="btn btn-primary">Create Post</button>
       </form>
     </div>
   )
